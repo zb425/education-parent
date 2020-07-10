@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.education.search.mapper.CourseMapper" >
+    <select id="getCourseList" resultType="com.education.search.pojo.SearchCourse">
+ 		SELECT
+	a.zb_id,
+	a.zb_name,
+	a.zb_coursetype_name,
+	a.zb_sub_coursetype,
+	a.zb_picture,
+	a.zb_study_count,
+	a.zb_brief
+FROM
+	t_zb_course a
+WHERE
+	a.zb_onsale = 1
+ 	</select>
+</mapper>

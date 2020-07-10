@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.education.mapper.TZbCourseMapper" >
+  <resultMap id="BaseResultMap" type="com.education.pojo.TZbCourse" >
+    <id column="zb_id" property="zbId" jdbcType="INTEGER" />
+    <result column="zb_name" property="zbName" jdbcType="VARCHAR" />
+    <result column="zb_type" property="zbType" jdbcType="VARCHAR" />
+    <result column="zb_coursetype" property="zbCoursetype" jdbcType="VARCHAR" />
+    <result column="zb_coursetype_name" property="zbCoursetypeName" jdbcType="VARCHAR" />
+    <result column="zb_sub_coursetype" property="zbSubCoursetype" jdbcType="VARCHAR" />
+    <result column="zb_sub_coursetype_name" property="zbSubCoursetypeName" jdbcType="VARCHAR" />
+    <result column="zb_direction" property="zbDirection" jdbcType="VARCHAR" />
+    <result column="zb_username" property="zbUsername" jdbcType="VARCHAR" />
+    <result column="zb_level" property="zbLevel" jdbcType="BIT" />
+    <result column="zb_free" property="zbFree" jdbcType="BIT" />
+    <result column="zb_price" property="zbPrice" jdbcType="DECIMAL" />
+    <result column="zb_time" property="zbTime" jdbcType="VARCHAR" />
+    <result column="zb_onsale" property="zbOnsale" jdbcType="BIT" />
+    <result column="zb_picture" property="zbPicture" jdbcType="VARCHAR" />
+    <result column="zb_recommend" property="zbRecommend" jdbcType="BIT" />
+    <result column="zb_weight" property="zbWeight" jdbcType="INTEGER" />
+    <result column="zb_study_count" property="zbStudyCount" jdbcType="INTEGER" />
+    <result column="zb_create_time" property="zbCreateTime" jdbcType="TIMESTAMP" />
+    <result column="zb_create_user" property="zbCreateUser" jdbcType="VARCHAR" />
+    <result column="zb_update_time" property="zbUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="zb_update_user" property="zbUpdateUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.education.pojo.TZbCourse" extends="BaseResultMap" >
+    <result column="zb_brief" property="zbBrief" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    zb_id, zb_name, zb_type, zb_coursetype, zb_coursetype_name, zb_sub_coursetype, zb_sub_coursetype_name, 
+    zb_direction, zb_username, zb_level, zb_free, zb_price, zb_time, zb_onsale, zb_picture, 
+    zb_recommend, zb_weight, zb_study_count, zb_create_time, zb_create_user, zb_update_time, 
+    zb_update_user
+  </sql>
+  <sql id="Blob_Column_List" >
+    zb_brief
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.education.pojo.TZbCourseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_zb_course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.education.pojo.TZbCourseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_zb_course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_zb_course
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_zb_course
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.education.pojo.TZbCourseExample" >
+    delete from t_zb_course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.education.pojo.TZbCourse" >
+    insert into t_zb_course (zb_id, zb_name, zb_type, 
+      zb_coursetype, zb_coursetype_name, zb_sub_coursetype, 
+      zb_sub_coursetype_name, zb_direction, zb_username, 
+      zb_level, zb_free, zb_price, zb_time, 
+      zb_onsale, zb_picture, zb_recommend, 
+      zb_weight, zb_study_count, zb_create_time, 
+      zb_create_user, zb_update_time, zb_update_user, 
+      zb_brief)
+    values (#{zbId,jdbcType=INTEGER}, #{zbName,jdbcType=VARCHAR}, #{zbType,jdbcType=VARCHAR}, 
+      #{zbCoursetype,jdbcType=VARCHAR}, #{zbCoursetypeName,jdbcType=VARCHAR}, #{zbSubCoursetype,jdbcType=VARCHAR}, 
+      #{zbSubCoursetypeName,jdbcType=VARCHAR}, #{zbDirection,jdbcType=VARCHAR}, #{zbUsername,jdbcType=VARCHAR}, 
+      #{zbLevel,jdbcType=BIT}, #{zbFree,jdbcType=BIT}, #{zbPrice,jdbcType=DECIMAL}, #{zbTime,jdbcType=VARCHAR}, 
+      #{zbOnsale,jdbcType=BIT}, #{zbPicture,jdbcType=VARCHAR}, #{zbRecommend,jdbcType=BIT}, 
+      #{zbWeight,jdbcType=INTEGER}, #{zbStudyCount,jdbcType=INTEGER}, #{zbCreateTime,jdbcType=TIMESTAMP}, 
+      #{zbCreateUser,jdbcType=VARCHAR}, #{zbUpdateTime,jdbcType=TIMESTAMP}, #{zbUpdateUser,jdbcType=VARCHAR}, 
+      #{zbBrief,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.education.pojo.TZbCourse" >
+    insert into t_zb_course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        zb_id,
+      </if>
+      <if test="zbName != null" >
+        zb_name,
+      </if>
+      <if test="zbType != null" >
+        zb_type,
+      </if>
+      <if test="zbCoursetype != null" >
+        zb_coursetype,
+      </if>
+      <if test="zbCoursetypeName != null" >
+        zb_coursetype_name,
+      </if>
+      <if test="zbSubCoursetype != null" >
+        zb_sub_coursetype,
+      </if>
+      <if test="zbSubCoursetypeName != null" >
+        zb_sub_coursetype_name,
+      </if>
+      <if test="zbDirection != null" >
+        zb_direction,
+      </if>
+      <if test="zbUsername != null" >
+        zb_username,
+      </if>
+      <if test="zbLevel != null" >
+        zb_level,
+      </if>
+      <if test="zbFree != null" >
+        zb_free,
+      </if>
+      <if test="zbPrice != null" >
+        zb_price,
+      </if>
+      <if test="zbTime != null" >
+        zb_time,
+      </if>
+      <if test="zbOnsale != null" >
+        zb_onsale,
+      </if>
+      <if test="zbPicture != null" >
+        zb_picture,
+      </if>
+      <if test="zbRecommend != null" >
+        zb_recommend,
+      </if>
+      <if test="zbWeight != null" >
+        zb_weight,
+      </if>
+      <if test="zbStudyCount != null" >
+        zb_study_count,
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time,
+      </if>
+      <if test="zbCreateUser != null" >
+        zb_create_user,
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time,
+      </if>
+      <if test="zbUpdateUser != null" >
+        zb_update_user,
+      </if>
+      <if test="zbBrief != null" >
+        zb_brief,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        #{zbId,jdbcType=INTEGER},
+      </if>
+      <if test="zbName != null" >
+        #{zbName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbType != null" >
+        #{zbType,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCoursetype != null" >
+        #{zbCoursetype,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCoursetypeName != null" >
+        #{zbCoursetypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbSubCoursetype != null" >
+        #{zbSubCoursetype,jdbcType=VARCHAR},
+      </if>
+      <if test="zbSubCoursetypeName != null" >
+        #{zbSubCoursetypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbDirection != null" >
+        #{zbDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="zbUsername != null" >
+        #{zbUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="zbLevel != null" >
+        #{zbLevel,jdbcType=BIT},
+      </if>
+      <if test="zbFree != null" >
+        #{zbFree,jdbcType=BIT},
+      </if>
+      <if test="zbPrice != null" >
+        #{zbPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="zbTime != null" >
+        #{zbTime,jdbcType=VARCHAR},
+      </if>
+      <if test="zbOnsale != null" >
+        #{zbOnsale,jdbcType=BIT},
+      </if>
+      <if test="zbPicture != null" >
+        #{zbPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="zbRecommend != null" >
+        #{zbRecommend,jdbcType=BIT},
+      </if>
+      <if test="zbWeight != null" >
+        #{zbWeight,jdbcType=INTEGER},
+      </if>
+      <if test="zbStudyCount != null" >
+        #{zbStudyCount,jdbcType=INTEGER},
+      </if>
+      <if test="zbCreateTime != null" >
+        #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbCreateUser != null" >
+        #{zbCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="zbUpdateTime != null" >
+        #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateUser != null" >
+        #{zbUpdateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="zbBrief != null" >
+        #{zbBrief,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.education.pojo.TZbCourseExample" resultType="java.lang.Integer" >
+    select count(*) from t_zb_course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_zb_course
+    <set >
+      <if test="record.zbId != null" >
+        zb_id = #{record.zbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbName != null" >
+        zb_name = #{record.zbName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbType != null" >
+        zb_type = #{record.zbType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbCoursetype != null" >
+        zb_coursetype = #{record.zbCoursetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbCoursetypeName != null" >
+        zb_coursetype_name = #{record.zbCoursetypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbSubCoursetype != null" >
+        zb_sub_coursetype = #{record.zbSubCoursetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbSubCoursetypeName != null" >
+        zb_sub_coursetype_name = #{record.zbSubCoursetypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbDirection != null" >
+        zb_direction = #{record.zbDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbUsername != null" >
+        zb_username = #{record.zbUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbLevel != null" >
+        zb_level = #{record.zbLevel,jdbcType=BIT},
+      </if>
+      <if test="record.zbFree != null" >
+        zb_free = #{record.zbFree,jdbcType=BIT},
+      </if>
+      <if test="record.zbPrice != null" >
+        zb_price = #{record.zbPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.zbTime != null" >
+        zb_time = #{record.zbTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbOnsale != null" >
+        zb_onsale = #{record.zbOnsale,jdbcType=BIT},
+      </if>
+      <if test="record.zbPicture != null" >
+        zb_picture = #{record.zbPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbRecommend != null" >
+        zb_recommend = #{record.zbRecommend,jdbcType=BIT},
+      </if>
+      <if test="record.zbWeight != null" >
+        zb_weight = #{record.zbWeight,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbStudyCount != null" >
+        zb_study_count = #{record.zbStudyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbCreateTime != null" >
+        zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zbCreateUser != null" >
+        zb_create_user = #{record.zbCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbUpdateTime != null" >
+        zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zbUpdateUser != null" >
+        zb_update_user = #{record.zbUpdateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbBrief != null" >
+        zb_brief = #{record.zbBrief,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_zb_course
+    set zb_id = #{record.zbId,jdbcType=INTEGER},
+      zb_name = #{record.zbName,jdbcType=VARCHAR},
+      zb_type = #{record.zbType,jdbcType=VARCHAR},
+      zb_coursetype = #{record.zbCoursetype,jdbcType=VARCHAR},
+      zb_coursetype_name = #{record.zbCoursetypeName,jdbcType=VARCHAR},
+      zb_sub_coursetype = #{record.zbSubCoursetype,jdbcType=VARCHAR},
+      zb_sub_coursetype_name = #{record.zbSubCoursetypeName,jdbcType=VARCHAR},
+      zb_direction = #{record.zbDirection,jdbcType=VARCHAR},
+      zb_username = #{record.zbUsername,jdbcType=VARCHAR},
+      zb_level = #{record.zbLevel,jdbcType=BIT},
+      zb_free = #{record.zbFree,jdbcType=BIT},
+      zb_price = #{record.zbPrice,jdbcType=DECIMAL},
+      zb_time = #{record.zbTime,jdbcType=VARCHAR},
+      zb_onsale = #{record.zbOnsale,jdbcType=BIT},
+      zb_picture = #{record.zbPicture,jdbcType=VARCHAR},
+      zb_recommend = #{record.zbRecommend,jdbcType=BIT},
+      zb_weight = #{record.zbWeight,jdbcType=INTEGER},
+      zb_study_count = #{record.zbStudyCount,jdbcType=INTEGER},
+      zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      zb_create_user = #{record.zbCreateUser,jdbcType=VARCHAR},
+      zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP},
+      zb_update_user = #{record.zbUpdateUser,jdbcType=VARCHAR},
+      zb_brief = #{record.zbBrief,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_zb_course
+    set zb_id = #{record.zbId,jdbcType=INTEGER},
+      zb_name = #{record.zbName,jdbcType=VARCHAR},
+      zb_type = #{record.zbType,jdbcType=VARCHAR},
+      zb_coursetype = #{record.zbCoursetype,jdbcType=VARCHAR},
+      zb_coursetype_name = #{record.zbCoursetypeName,jdbcType=VARCHAR},
+      zb_sub_coursetype = #{record.zbSubCoursetype,jdbcType=VARCHAR},
+      zb_sub_coursetype_name = #{record.zbSubCoursetypeName,jdbcType=VARCHAR},
+      zb_direction = #{record.zbDirection,jdbcType=VARCHAR},
+      zb_username = #{record.zbUsername,jdbcType=VARCHAR},
+      zb_level = #{record.zbLevel,jdbcType=BIT},
+      zb_free = #{record.zbFree,jdbcType=BIT},
+      zb_price = #{record.zbPrice,jdbcType=DECIMAL},
+      zb_time = #{record.zbTime,jdbcType=VARCHAR},
+      zb_onsale = #{record.zbOnsale,jdbcType=BIT},
+      zb_picture = #{record.zbPicture,jdbcType=VARCHAR},
+      zb_recommend = #{record.zbRecommend,jdbcType=BIT},
+      zb_weight = #{record.zbWeight,jdbcType=INTEGER},
+      zb_study_count = #{record.zbStudyCount,jdbcType=INTEGER},
+      zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      zb_create_user = #{record.zbCreateUser,jdbcType=VARCHAR},
+      zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP},
+      zb_update_user = #{record.zbUpdateUser,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.education.pojo.TZbCourse" >
+    update t_zb_course
+    <set >
+      <if test="zbName != null" >
+        zb_name = #{zbName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbType != null" >
+        zb_type = #{zbType,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCoursetype != null" >
+        zb_coursetype = #{zbCoursetype,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCoursetypeName != null" >
+        zb_coursetype_name = #{zbCoursetypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbSubCoursetype != null" >
+        zb_sub_coursetype = #{zbSubCoursetype,jdbcType=VARCHAR},
+      </if>
+      <if test="zbSubCoursetypeName != null" >
+        zb_sub_coursetype_name = #{zbSubCoursetypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbDirection != null" >
+        zb_direction = #{zbDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="zbUsername != null" >
+        zb_username = #{zbUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="zbLevel != null" >
+        zb_level = #{zbLevel,jdbcType=BIT},
+      </if>
+      <if test="zbFree != null" >
+        zb_free = #{zbFree,jdbcType=BIT},
+      </if>
+      <if test="zbPrice != null" >
+        zb_price = #{zbPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="zbTime != null" >
+        zb_time = #{zbTime,jdbcType=VARCHAR},
+      </if>
+      <if test="zbOnsale != null" >
+        zb_onsale = #{zbOnsale,jdbcType=BIT},
+      </if>
+      <if test="zbPicture != null" >
+        zb_picture = #{zbPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="zbRecommend != null" >
+        zb_recommend = #{zbRecommend,jdbcType=BIT},
+      </if>
+      <if test="zbWeight != null" >
+        zb_weight = #{zbWeight,jdbcType=INTEGER},
+      </if>
+      <if test="zbStudyCount != null" >
+        zb_study_count = #{zbStudyCount,jdbcType=INTEGER},
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbCreateUser != null" >
+        zb_create_user = #{zbCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateUser != null" >
+        zb_update_user = #{zbUpdateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="zbBrief != null" >
+        zb_brief = #{zbBrief,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.education.pojo.TZbCourse" >
+    update t_zb_course
+    set zb_name = #{zbName,jdbcType=VARCHAR},
+      zb_type = #{zbType,jdbcType=VARCHAR},
+      zb_coursetype = #{zbCoursetype,jdbcType=VARCHAR},
+      zb_coursetype_name = #{zbCoursetypeName,jdbcType=VARCHAR},
+      zb_sub_coursetype = #{zbSubCoursetype,jdbcType=VARCHAR},
+      zb_sub_coursetype_name = #{zbSubCoursetypeName,jdbcType=VARCHAR},
+      zb_direction = #{zbDirection,jdbcType=VARCHAR},
+      zb_username = #{zbUsername,jdbcType=VARCHAR},
+      zb_level = #{zbLevel,jdbcType=BIT},
+      zb_free = #{zbFree,jdbcType=BIT},
+      zb_price = #{zbPrice,jdbcType=DECIMAL},
+      zb_time = #{zbTime,jdbcType=VARCHAR},
+      zb_onsale = #{zbOnsale,jdbcType=BIT},
+      zb_picture = #{zbPicture,jdbcType=VARCHAR},
+      zb_recommend = #{zbRecommend,jdbcType=BIT},
+      zb_weight = #{zbWeight,jdbcType=INTEGER},
+      zb_study_count = #{zbStudyCount,jdbcType=INTEGER},
+      zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      zb_create_user = #{zbCreateUser,jdbcType=VARCHAR},
+      zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP},
+      zb_update_user = #{zbUpdateUser,jdbcType=VARCHAR},
+      zb_brief = #{zbBrief,jdbcType=LONGVARCHAR}
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.education.pojo.TZbCourse" >
+    update t_zb_course
+    set zb_name = #{zbName,jdbcType=VARCHAR},
+      zb_type = #{zbType,jdbcType=VARCHAR},
+      zb_coursetype = #{zbCoursetype,jdbcType=VARCHAR},
+      zb_coursetype_name = #{zbCoursetypeName,jdbcType=VARCHAR},
+      zb_sub_coursetype = #{zbSubCoursetype,jdbcType=VARCHAR},
+      zb_sub_coursetype_name = #{zbSubCoursetypeName,jdbcType=VARCHAR},
+      zb_direction = #{zbDirection,jdbcType=VARCHAR},
+      zb_username = #{zbUsername,jdbcType=VARCHAR},
+      zb_level = #{zbLevel,jdbcType=BIT},
+      zb_free = #{zbFree,jdbcType=BIT},
+      zb_price = #{zbPrice,jdbcType=DECIMAL},
+      zb_time = #{zbTime,jdbcType=VARCHAR},
+      zb_onsale = #{zbOnsale,jdbcType=BIT},
+      zb_picture = #{zbPicture,jdbcType=VARCHAR},
+      zb_recommend = #{zbRecommend,jdbcType=BIT},
+      zb_weight = #{zbWeight,jdbcType=INTEGER},
+      zb_study_count = #{zbStudyCount,jdbcType=INTEGER},
+      zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      zb_create_user = #{zbCreateUser,jdbcType=VARCHAR},
+      zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP},
+      zb_update_user = #{zbUpdateUser,jdbcType=VARCHAR}
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+</mapper>

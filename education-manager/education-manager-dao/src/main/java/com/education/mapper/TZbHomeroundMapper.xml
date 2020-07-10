@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.education.mapper.TZbHomeroundMapper" >
+  <resultMap id="BaseResultMap" type="com.education.pojo.TZbHomeround" >
+    <id column="zb_id" property="zbId" jdbcType="INTEGER" />
+    <result column="zb_name" property="zbName" jdbcType="VARCHAR" />
+    <result column="zb_picture" property="zbPicture" jdbcType="VARCHAR" />
+    <result column="zb_url" property="zbUrl" jdbcType="VARCHAR" />
+    <result column="zb_weight" property="zbWeight" jdbcType="INTEGER" />
+    <result column="zb_enable" property="zbEnable" jdbcType="BIT" />
+    <result column="zb_create_time" property="zbCreateTime" jdbcType="TIMESTAMP" />
+    <result column="zb_update_time" property="zbUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    zb_id, zb_name, zb_picture, zb_url, zb_weight, zb_enable, zb_create_time, zb_update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.education.pojo.TZbHomeroundExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_zb_homeround
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_zb_homeround
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_zb_homeround
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.education.pojo.TZbHomeroundExample" >
+    delete from t_zb_homeround
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.education.pojo.TZbHomeround" >
+    insert into t_zb_homeround (zb_id, zb_name, zb_picture, 
+      zb_url, zb_weight, zb_enable, 
+      zb_create_time, zb_update_time)
+    values (#{zbId,jdbcType=INTEGER}, #{zbName,jdbcType=VARCHAR}, #{zbPicture,jdbcType=VARCHAR}, 
+      #{zbUrl,jdbcType=VARCHAR}, #{zbWeight,jdbcType=INTEGER}, #{zbEnable,jdbcType=BIT}, 
+      #{zbCreateTime,jdbcType=TIMESTAMP}, #{zbUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.education.pojo.TZbHomeround" >
+    insert into t_zb_homeround
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        zb_id,
+      </if>
+      <if test="zbName != null" >
+        zb_name,
+      </if>
+      <if test="zbPicture != null" >
+        zb_picture,
+      </if>
+      <if test="zbUrl != null" >
+        zb_url,
+      </if>
+      <if test="zbWeight != null" >
+        zb_weight,
+      </if>
+      <if test="zbEnable != null" >
+        zb_enable,
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time,
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        #{zbId,jdbcType=INTEGER},
+      </if>
+      <if test="zbName != null" >
+        #{zbName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbPicture != null" >
+        #{zbPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="zbUrl != null" >
+        #{zbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="zbWeight != null" >
+        #{zbWeight,jdbcType=INTEGER},
+      </if>
+      <if test="zbEnable != null" >
+        #{zbEnable,jdbcType=BIT},
+      </if>
+      <if test="zbCreateTime != null" >
+        #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateTime != null" >
+        #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.education.pojo.TZbHomeroundExample" resultType="java.lang.Integer" >
+    select count(*) from t_zb_homeround
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_zb_homeround
+    <set >
+      <if test="record.zbId != null" >
+        zb_id = #{record.zbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbName != null" >
+        zb_name = #{record.zbName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbPicture != null" >
+        zb_picture = #{record.zbPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbUrl != null" >
+        zb_url = #{record.zbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbWeight != null" >
+        zb_weight = #{record.zbWeight,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbEnable != null" >
+        zb_enable = #{record.zbEnable,jdbcType=BIT},
+      </if>
+      <if test="record.zbCreateTime != null" >
+        zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zbUpdateTime != null" >
+        zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_zb_homeround
+    set zb_id = #{record.zbId,jdbcType=INTEGER},
+      zb_name = #{record.zbName,jdbcType=VARCHAR},
+      zb_picture = #{record.zbPicture,jdbcType=VARCHAR},
+      zb_url = #{record.zbUrl,jdbcType=VARCHAR},
+      zb_weight = #{record.zbWeight,jdbcType=INTEGER},
+      zb_enable = #{record.zbEnable,jdbcType=BIT},
+      zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.education.pojo.TZbHomeround" >
+    update t_zb_homeround
+    <set >
+      <if test="zbName != null" >
+        zb_name = #{zbName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbPicture != null" >
+        zb_picture = #{zbPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="zbUrl != null" >
+        zb_url = #{zbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="zbWeight != null" >
+        zb_weight = #{zbWeight,jdbcType=INTEGER},
+      </if>
+      <if test="zbEnable != null" >
+        zb_enable = #{zbEnable,jdbcType=BIT},
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.education.pojo.TZbHomeround" >
+    update t_zb_homeround
+    set zb_name = #{zbName,jdbcType=VARCHAR},
+      zb_picture = #{zbPicture,jdbcType=VARCHAR},
+      zb_url = #{zbUrl,jdbcType=VARCHAR},
+      zb_weight = #{zbWeight,jdbcType=INTEGER},
+      zb_enable = #{zbEnable,jdbcType=BIT},
+      zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP}
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+</mapper>

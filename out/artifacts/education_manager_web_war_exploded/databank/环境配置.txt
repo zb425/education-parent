@@ -1,0 +1,8 @@
+jdk安装
+/usr/java/jdk1.8.0_251
+
+tomcat安装
+/usr/java/tomcat8
+
+maven安装
+/usr/java/maven

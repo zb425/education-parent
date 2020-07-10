@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.education.mapper.TZbUserMapper" >
+  <resultMap id="BaseResultMap" type="com.education.pojo.TZbUser" >
+    <id column="zb_id" property="zbId" jdbcType="INTEGER" />
+    <result column="zb_realname" property="zbRealname" jdbcType="VARCHAR" />
+    <result column="zb_username" property="zbUsername" jdbcType="VARCHAR" />
+    <result column="zb_password" property="zbPassword" jdbcType="VARCHAR" />
+    <result column="zb_gender" property="zbGender" jdbcType="BIT" />
+    <result column="zb_header" property="zbHeader" jdbcType="VARCHAR" />
+    <result column="zb_mobile" property="zbMobile" jdbcType="VARCHAR" />
+    <result column="zb_status" property="zbStatus" jdbcType="BIT" />
+    <result column="zb_education" property="zbEducation" jdbcType="VARCHAR" />
+    <result column="zb_college_name" property="zbCollegeName" jdbcType="VARCHAR" />
+    <result column="zb_title" property="zbTitle" jdbcType="VARCHAR" />
+    <result column="zb_province" property="zbProvince" jdbcType="VARCHAR" />
+    <result column="zb_city" property="zbCity" jdbcType="VARCHAR" />
+    <result column="zb_district" property="zbDistrict" jdbcType="VARCHAR" />
+    <result column="zb_weight" property="zbWeight" jdbcType="INTEGER" />
+    <result column="zb_create_time" property="zbCreateTime" jdbcType="TIMESTAMP" />
+    <result column="zb_update_time" property="zbUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    zb_id, zb_realname, zb_username, zb_password, zb_gender, zb_header, zb_mobile, zb_status, 
+    zb_education, zb_college_name, zb_title, zb_province, zb_city, zb_district,
+    zb_weight, zb_create_time, zb_update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.education.pojo.TZbUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_zb_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_zb_user
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_zb_user
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.education.pojo.TZbUserExample" >
+    delete from t_zb_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.education.pojo.TZbUser" >
+    insert into t_zb_user (zb_id, zb_realname, zb_username, 
+      zb_password, zb_gender, zb_header, 
+      zb_mobile, zb_status,
+      zb_education, zb_college_name, zb_title, 
+      zb_province, zb_city, zb_district, 
+      zb_weight, zb_create_time, zb_update_time
+      )
+    values (#{zbId,jdbcType=INTEGER}, #{zbRealname,jdbcType=VARCHAR}, #{zbUsername,jdbcType=VARCHAR}, 
+      #{zbPassword,jdbcType=VARCHAR}, #{zbGender,jdbcType=BIT}, #{zbHeader,jdbcType=VARCHAR}, 
+      #{zbMobile,jdbcType=VARCHAR}, #{zbStatus,jdbcType=BIT},
+      #{zbEducation,jdbcType=VARCHAR}, #{zbCollegeName,jdbcType=VARCHAR}, #{zbTitle,jdbcType=VARCHAR}, 
+      #{zbProvince,jdbcType=VARCHAR}, #{zbCity,jdbcType=VARCHAR}, #{zbDistrict,jdbcType=VARCHAR}, 
+      #{zbWeight,jdbcType=INTEGER}, #{zbCreateTime,jdbcType=TIMESTAMP}, #{zbUpdateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.education.pojo.TZbUser" >
+    insert into t_zb_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        zb_id,
+      </if>
+      <if test="zbRealname != null" >
+        zb_realname,
+      </if>
+      <if test="zbUsername != null" >
+        zb_username,
+      </if>
+      <if test="zbPassword != null" >
+        zb_password,
+      </if>
+      <if test="zbGender != null" >
+        zb_gender,
+      </if>
+      <if test="zbHeader != null" >
+        zb_header,
+      </if>
+      <if test="zbMobile != null" >
+        zb_mobile,
+      </if>
+      <if test="zbStatus != null" >
+        zb_status,
+      </if>
+
+      <if test="zbEducation != null" >
+        zb_education,
+      </if>
+      <if test="zbCollegeName != null" >
+        zb_college_name,
+      </if>
+      <if test="zbTitle != null" >
+        zb_title,
+      </if>
+      <if test="zbProvince != null" >
+        zb_province,
+      </if>
+      <if test="zbCity != null" >
+        zb_city,
+      </if>
+      <if test="zbDistrict != null" >
+        zb_district,
+      </if>
+      <if test="zbWeight != null" >
+        zb_weight,
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time,
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        #{zbId,jdbcType=INTEGER},
+      </if>
+      <if test="zbRealname != null" >
+        #{zbRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="zbUsername != null" >
+        #{zbUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="zbPassword != null" >
+        #{zbPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="zbGender != null" >
+        #{zbGender,jdbcType=BIT},
+      </if>
+      <if test="zbHeader != null" >
+        #{zbHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="zbMobile != null" >
+        #{zbMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="zbStatus != null" >
+        #{zbStatus,jdbcType=BIT},
+      </if>
+
+      <if test="zbEducation != null" >
+        #{zbEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCollegeName != null" >
+        #{zbCollegeName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbTitle != null" >
+        #{zbTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="zbProvince != null" >
+        #{zbProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCity != null" >
+        #{zbCity,jdbcType=VARCHAR},
+      </if>
+      <if test="zbDistrict != null" >
+        #{zbDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="zbWeight != null" >
+        #{zbWeight,jdbcType=INTEGER},
+      </if>
+      <if test="zbCreateTime != null" >
+        #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateTime != null" >
+        #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.education.pojo.TZbUserExample" resultType="java.lang.Integer" >
+    select count(*) from t_zb_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_zb_user
+    <set >
+      <if test="record.zbId != null" >
+        zb_id = #{record.zbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbRealname != null" >
+        zb_realname = #{record.zbRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbUsername != null" >
+        zb_username = #{record.zbUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbPassword != null" >
+        zb_password = #{record.zbPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbGender != null" >
+        zb_gender = #{record.zbGender,jdbcType=BIT},
+      </if>
+      <if test="record.zbHeader != null" >
+        zb_header = #{record.zbHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbMobile != null" >
+        zb_mobile = #{record.zbMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbStatus != null" >
+        zb_status = #{record.zbStatus,jdbcType=BIT},
+      </if>
+
+      <if test="record.zbEducation != null" >
+        zb_education = #{record.zbEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbCollegeName != null" >
+        zb_college_name = #{record.zbCollegeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbTitle != null" >
+        zb_title = #{record.zbTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbProvince != null" >
+        zb_province = #{record.zbProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbCity != null" >
+        zb_city = #{record.zbCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbDistrict != null" >
+        zb_district = #{record.zbDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbWeight != null" >
+        zb_weight = #{record.zbWeight,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbCreateTime != null" >
+        zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zbUpdateTime != null" >
+        zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_zb_user
+    set zb_id = #{record.zbId,jdbcType=INTEGER},
+      zb_realname = #{record.zbRealname,jdbcType=VARCHAR},
+      zb_username = #{record.zbUsername,jdbcType=VARCHAR},
+      zb_password = #{record.zbPassword,jdbcType=VARCHAR},
+      zb_gender = #{record.zbGender,jdbcType=BIT},
+      zb_header = #{record.zbHeader,jdbcType=VARCHAR},
+      zb_mobile = #{record.zbMobile,jdbcType=VARCHAR},
+      zb_status = #{record.zbStatus,jdbcType=BIT},
+
+      zb_education = #{record.zbEducation,jdbcType=VARCHAR},
+      zb_college_name = #{record.zbCollegeName,jdbcType=VARCHAR},
+      zb_title = #{record.zbTitle,jdbcType=VARCHAR},
+      zb_province = #{record.zbProvince,jdbcType=VARCHAR},
+      zb_city = #{record.zbCity,jdbcType=VARCHAR},
+      zb_district = #{record.zbDistrict,jdbcType=VARCHAR},
+      zb_weight = #{record.zbWeight,jdbcType=INTEGER},
+      zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.education.pojo.TZbUser" >
+    update t_zb_user
+    <set >
+      <if test="zbRealname != null" >
+        zb_realname = #{zbRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="zbUsername != null" >
+        zb_username = #{zbUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="zbPassword != null" >
+        zb_password = #{zbPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="zbGender != null" >
+        zb_gender = #{zbGender,jdbcType=BIT},
+      </if>
+      <if test="zbHeader != null" >
+        zb_header = #{zbHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="zbMobile != null" >
+        zb_mobile = #{zbMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="zbStatus != null" >
+        zb_status = #{zbStatus,jdbcType=BIT},
+      </if>
+
+      <if test="zbEducation != null" >
+        zb_education = #{zbEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCollegeName != null" >
+        zb_college_name = #{zbCollegeName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbTitle != null" >
+        zb_title = #{zbTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="zbProvince != null" >
+        zb_province = #{zbProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCity != null" >
+        zb_city = #{zbCity,jdbcType=VARCHAR},
+      </if>
+      <if test="zbDistrict != null" >
+        zb_district = #{zbDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="zbWeight != null" >
+        zb_weight = #{zbWeight,jdbcType=INTEGER},
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.education.pojo.TZbUser" >
+    update t_zb_user
+    set zb_realname = #{zbRealname,jdbcType=VARCHAR},
+      zb_username = #{zbUsername,jdbcType=VARCHAR},
+      zb_password = #{zbPassword,jdbcType=VARCHAR},
+      zb_gender = #{zbGender,jdbcType=BIT},
+      zb_header = #{zbHeader,jdbcType=VARCHAR},
+      zb_mobile = #{zbMobile,jdbcType=VARCHAR},
+      zb_status = #{zbStatus,jdbcType=BIT},
+
+      zb_education = #{zbEducation,jdbcType=VARCHAR},
+      zb_college_name = #{zbCollegeName,jdbcType=VARCHAR},
+      zb_title = #{zbTitle,jdbcType=VARCHAR},
+      zb_province = #{zbProvince,jdbcType=VARCHAR},
+      zb_city = #{zbCity,jdbcType=VARCHAR},
+      zb_district = #{zbDistrict,jdbcType=VARCHAR},
+      zb_weight = #{zbWeight,jdbcType=INTEGER},
+      zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP}
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.education.mapper.TZbDatabankMapper" >
+  <resultMap id="BaseResultMap" type="com.education.pojo.TZbDatabank" >
+    <id column="zb_id" property="zbId" jdbcType="INTEGER" />
+    <result column="zb_databank_name" property="zbDatabankName" jdbcType="VARCHAR" />
+    <result column="zb_databank_username" property="zbDatabankUsername" jdbcType="VARCHAR" />
+    <result column="zb_databank_url" property="zbDatabankUrl" jdbcType="VARCHAR" />
+    <result column="zb_databank_count" property="zbDatabankCount" jdbcType="INTEGER" />
+    <result column="zb_databank_authority" property="zbDatabankAuthority" jdbcType="INTEGER" />
+    <result column="zb_create_time" property="zbCreateTime" jdbcType="TIMESTAMP" />
+    <result column="zb_update_time" property="zbUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    zb_id, zb_databank_name, zb_databank_username, zb_databank_url, zb_databank_count, 
+    zb_databank_authority, zb_create_time, zb_update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.education.pojo.TZbDatabankExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_zb_databank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_zb_databank
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_zb_databank
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.education.pojo.TZbDatabankExample" >
+    delete from t_zb_databank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.education.pojo.TZbDatabank" >
+    insert into t_zb_databank (zb_id, zb_databank_name, zb_databank_username, 
+      zb_databank_url, zb_databank_count, zb_databank_authority, 
+      zb_create_time, zb_update_time)
+    values (#{zbId,jdbcType=INTEGER}, #{zbDatabankName,jdbcType=VARCHAR}, #{zbDatabankUsername,jdbcType=VARCHAR}, 
+      #{zbDatabankUrl,jdbcType=VARCHAR}, #{zbDatabankCount,jdbcType=INTEGER}, #{zbDatabankAuthority,jdbcType=INTEGER}, 
+      #{zbCreateTime,jdbcType=TIMESTAMP}, #{zbUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.education.pojo.TZbDatabank" >
+    insert into t_zb_databank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        zb_id,
+      </if>
+      <if test="zbDatabankName != null" >
+        zb_databank_name,
+      </if>
+      <if test="zbDatabankUsername != null" >
+        zb_databank_username,
+      </if>
+      <if test="zbDatabankUrl != null" >
+        zb_databank_url,
+      </if>
+      <if test="zbDatabankCount != null" >
+        zb_databank_count,
+      </if>
+      <if test="zbDatabankAuthority != null" >
+        zb_databank_authority,
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time,
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        #{zbId,jdbcType=INTEGER},
+      </if>
+      <if test="zbDatabankName != null" >
+        #{zbDatabankName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbDatabankUsername != null" >
+        #{zbDatabankUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="zbDatabankUrl != null" >
+        #{zbDatabankUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="zbDatabankCount != null" >
+        #{zbDatabankCount,jdbcType=INTEGER},
+      </if>
+      <if test="zbDatabankAuthority != null" >
+        #{zbDatabankAuthority,jdbcType=INTEGER},
+      </if>
+      <if test="zbCreateTime != null" >
+        #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateTime != null" >
+        #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.education.pojo.TZbDatabankExample" resultType="java.lang.Integer" >
+    select count(*) from t_zb_databank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_zb_databank
+    <set >
+      <if test="record.zbId != null" >
+        zb_id = #{record.zbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbDatabankName != null" >
+        zb_databank_name = #{record.zbDatabankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbDatabankUsername != null" >
+        zb_databank_username = #{record.zbDatabankUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbDatabankUrl != null" >
+        zb_databank_url = #{record.zbDatabankUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbDatabankCount != null" >
+        zb_databank_count = #{record.zbDatabankCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbDatabankAuthority != null" >
+        zb_databank_authority = #{record.zbDatabankAuthority,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbCreateTime != null" >
+        zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zbUpdateTime != null" >
+        zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_zb_databank
+    set zb_id = #{record.zbId,jdbcType=INTEGER},
+      zb_databank_name = #{record.zbDatabankName,jdbcType=VARCHAR},
+      zb_databank_username = #{record.zbDatabankUsername,jdbcType=VARCHAR},
+      zb_databank_url = #{record.zbDatabankUrl,jdbcType=VARCHAR},
+      zb_databank_count = #{record.zbDatabankCount,jdbcType=INTEGER},
+      zb_databank_authority = #{record.zbDatabankAuthority,jdbcType=INTEGER},
+      zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.education.pojo.TZbDatabank" >
+    update t_zb_databank
+    <set >
+      <if test="zbDatabankName != null" >
+        zb_databank_name = #{zbDatabankName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbDatabankUsername != null" >
+        zb_databank_username = #{zbDatabankUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="zbDatabankUrl != null" >
+        zb_databank_url = #{zbDatabankUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="zbDatabankCount != null" >
+        zb_databank_count = #{zbDatabankCount,jdbcType=INTEGER},
+      </if>
+      <if test="zbDatabankAuthority != null" >
+        zb_databank_authority = #{zbDatabankAuthority,jdbcType=INTEGER},
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.education.pojo.TZbDatabank" >
+    update t_zb_databank
+    set zb_databank_name = #{zbDatabankName,jdbcType=VARCHAR},
+      zb_databank_username = #{zbDatabankUsername,jdbcType=VARCHAR},
+      zb_databank_url = #{zbDatabankUrl,jdbcType=VARCHAR},
+      zb_databank_count = #{zbDatabankCount,jdbcType=INTEGER},
+      zb_databank_authority = #{zbDatabankAuthority,jdbcType=INTEGER},
+      zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP}
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+</mapper>

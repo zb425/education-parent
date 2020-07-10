@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.education.mapper.TZbDiscussionCircleMapper" >
+  <resultMap id="BaseResultMap" type="com.education.pojo.TZbDiscussionCircle" >
+    <id column="zb_id" property="zbId" jdbcType="INTEGER" />
+    <result column="zb_circle_username" property="zbCircleUsername" jdbcType="VARCHAR" />
+    <result column="zb_circle_content" property="zbCircleContent" jdbcType="VARCHAR" />
+    <result column="zb_circle_image" property="zbCircleImage" jdbcType="VARCHAR" />
+    <result column="zb_circle_discussionId" property="zbCircleDiscussionid" jdbcType="INTEGER" />
+    <result column="zb_circle_authority" property="zbCircleAuthority" jdbcType="INTEGER" />
+    <result column="zb_create_time" property="zbCreateTime" jdbcType="TIMESTAMP" />
+    <result column="zb_update_time" property="zbUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    zb_id, zb_circle_username, zb_circle_content, zb_circle_image, zb_circle_discussionId, 
+    zb_circle_authority, zb_create_time, zb_update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.education.pojo.TZbDiscussionCircleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_zb_discussion_circle
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_zb_discussion_circle
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_zb_discussion_circle
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.education.pojo.TZbDiscussionCircleExample" >
+    delete from t_zb_discussion_circle
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.education.pojo.TZbDiscussionCircle" >
+    insert into t_zb_discussion_circle (zb_id, zb_circle_username, zb_circle_content, 
+      zb_circle_image, zb_circle_discussionId, zb_circle_authority, 
+      zb_create_time, zb_update_time)
+    values (#{zbId,jdbcType=INTEGER}, #{zbCircleUsername,jdbcType=VARCHAR}, #{zbCircleContent,jdbcType=VARCHAR}, 
+      #{zbCircleImage,jdbcType=VARCHAR}, #{zbCircleDiscussionid,jdbcType=INTEGER}, #{zbCircleAuthority,jdbcType=INTEGER}, 
+      #{zbCreateTime,jdbcType=TIMESTAMP}, #{zbUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.education.pojo.TZbDiscussionCircle" >
+    insert into t_zb_discussion_circle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        zb_id,
+      </if>
+      <if test="zbCircleUsername != null" >
+        zb_circle_username,
+      </if>
+      <if test="zbCircleContent != null" >
+        zb_circle_content,
+      </if>
+      <if test="zbCircleImage != null" >
+        zb_circle_image,
+      </if>
+      <if test="zbCircleDiscussionid != null" >
+        zb_circle_discussionId,
+      </if>
+      <if test="zbCircleAuthority != null" >
+        zb_circle_authority,
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time,
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        #{zbId,jdbcType=INTEGER},
+      </if>
+      <if test="zbCircleUsername != null" >
+        #{zbCircleUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCircleContent != null" >
+        #{zbCircleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCircleImage != null" >
+        #{zbCircleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCircleDiscussionid != null" >
+        #{zbCircleDiscussionid,jdbcType=INTEGER},
+      </if>
+      <if test="zbCircleAuthority != null" >
+        #{zbCircleAuthority,jdbcType=INTEGER},
+      </if>
+      <if test="zbCreateTime != null" >
+        #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateTime != null" >
+        #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.education.pojo.TZbDiscussionCircleExample" resultType="java.lang.Integer" >
+    select count(*) from t_zb_discussion_circle
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_zb_discussion_circle
+    <set >
+      <if test="record.zbId != null" >
+        zb_id = #{record.zbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbCircleUsername != null" >
+        zb_circle_username = #{record.zbCircleUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbCircleContent != null" >
+        zb_circle_content = #{record.zbCircleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbCircleImage != null" >
+        zb_circle_image = #{record.zbCircleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbCircleDiscussionid != null" >
+        zb_circle_discussionId = #{record.zbCircleDiscussionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbCircleAuthority != null" >
+        zb_circle_authority = #{record.zbCircleAuthority,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbCreateTime != null" >
+        zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zbUpdateTime != null" >
+        zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_zb_discussion_circle
+    set zb_id = #{record.zbId,jdbcType=INTEGER},
+      zb_circle_username = #{record.zbCircleUsername,jdbcType=VARCHAR},
+      zb_circle_content = #{record.zbCircleContent,jdbcType=VARCHAR},
+      zb_circle_image = #{record.zbCircleImage,jdbcType=VARCHAR},
+      zb_circle_discussionId = #{record.zbCircleDiscussionid,jdbcType=INTEGER},
+      zb_circle_authority = #{record.zbCircleAuthority,jdbcType=INTEGER},
+      zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.education.pojo.TZbDiscussionCircle" >
+    update t_zb_discussion_circle
+    <set >
+      <if test="zbCircleUsername != null" >
+        zb_circle_username = #{zbCircleUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCircleContent != null" >
+        zb_circle_content = #{zbCircleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCircleImage != null" >
+        zb_circle_image = #{zbCircleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCircleDiscussionid != null" >
+        zb_circle_discussionId = #{zbCircleDiscussionid,jdbcType=INTEGER},
+      </if>
+      <if test="zbCircleAuthority != null" >
+        zb_circle_authority = #{zbCircleAuthority,jdbcType=INTEGER},
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.education.pojo.TZbDiscussionCircle" >
+    update t_zb_discussion_circle
+    set zb_circle_username = #{zbCircleUsername,jdbcType=VARCHAR},
+      zb_circle_content = #{zbCircleContent,jdbcType=VARCHAR},
+      zb_circle_image = #{zbCircleImage,jdbcType=VARCHAR},
+      zb_circle_discussionId = #{zbCircleDiscussionid,jdbcType=INTEGER},
+      zb_circle_authority = #{zbCircleAuthority,jdbcType=INTEGER},
+      zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP}
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+</mapper>

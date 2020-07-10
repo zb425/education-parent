@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.education.mapper.TZbCourseCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.education.pojo.TZbCourseComment" >
+    <id column="zb_id" property="zbId" jdbcType="INTEGER" />
+    <result column="zb_username" property="zbUsername" jdbcType="VARCHAR" />
+    <result column="zb_to_username" property="zbToUsername" jdbcType="VARCHAR" />
+    <result column="zb_course_id" property="zbCourseId" jdbcType="INTEGER" />
+    <result column="zb_section_id" property="zbSectionId" jdbcType="INTEGER" />
+    <result column="zb_section_title" property="zbSectionTitle" jdbcType="VARCHAR" />
+    <result column="zb_content" property="zbContent" jdbcType="VARCHAR" />
+    <result column="zb_ref_id" property="zbRefId" jdbcType="INTEGER" />
+    <result column="zb_ref_content" property="zbRefContent" jdbcType="VARCHAR" />
+    <result column="zb_type" property="zbType" jdbcType="TINYINT" />
+    <result column="zb_create_time" property="zbCreateTime" jdbcType="TIMESTAMP" />
+    <result column="zb_update_time" property="zbUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    zb_id, zb_username, zb_to_username, zb_course_id, zb_section_id, zb_section_title, 
+    zb_content, zb_ref_id, zb_ref_content, zb_type, zb_create_time, zb_update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.education.pojo.TZbCourseCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_zb_course_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_zb_course_comment
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_zb_course_comment
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.education.pojo.TZbCourseCommentExample" >
+    delete from t_zb_course_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.education.pojo.TZbCourseComment" >
+    insert into t_zb_course_comment (zb_id, zb_username, zb_to_username, 
+      zb_course_id, zb_section_id, zb_section_title, 
+      zb_content, zb_ref_id, zb_ref_content, 
+      zb_type, zb_create_time, zb_update_time
+      )
+    values (#{zbId,jdbcType=INTEGER}, #{zbUsername,jdbcType=VARCHAR}, #{zbToUsername,jdbcType=VARCHAR}, 
+      #{zbCourseId,jdbcType=INTEGER}, #{zbSectionId,jdbcType=INTEGER}, #{zbSectionTitle,jdbcType=VARCHAR}, 
+      #{zbContent,jdbcType=VARCHAR}, #{zbRefId,jdbcType=INTEGER}, #{zbRefContent,jdbcType=VARCHAR}, 
+      #{zbType,jdbcType=TINYINT}, #{zbCreateTime,jdbcType=TIMESTAMP}, #{zbUpdateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.education.pojo.TZbCourseComment" >
+    insert into t_zb_course_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        zb_id,
+      </if>
+      <if test="zbUsername != null" >
+        zb_username,
+      </if>
+      <if test="zbToUsername != null" >
+        zb_to_username,
+      </if>
+      <if test="zbCourseId != null" >
+        zb_course_id,
+      </if>
+      <if test="zbSectionId != null" >
+        zb_section_id,
+      </if>
+      <if test="zbSectionTitle != null" >
+        zb_section_title,
+      </if>
+      <if test="zbContent != null" >
+        zb_content,
+      </if>
+      <if test="zbRefId != null" >
+        zb_ref_id,
+      </if>
+      <if test="zbRefContent != null" >
+        zb_ref_content,
+      </if>
+      <if test="zbType != null" >
+        zb_type,
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time,
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        #{zbId,jdbcType=INTEGER},
+      </if>
+      <if test="zbUsername != null" >
+        #{zbUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="zbToUsername != null" >
+        #{zbToUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCourseId != null" >
+        #{zbCourseId,jdbcType=INTEGER},
+      </if>
+      <if test="zbSectionId != null" >
+        #{zbSectionId,jdbcType=INTEGER},
+      </if>
+      <if test="zbSectionTitle != null" >
+        #{zbSectionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="zbContent != null" >
+        #{zbContent,jdbcType=VARCHAR},
+      </if>
+      <if test="zbRefId != null" >
+        #{zbRefId,jdbcType=INTEGER},
+      </if>
+      <if test="zbRefContent != null" >
+        #{zbRefContent,jdbcType=VARCHAR},
+      </if>
+      <if test="zbType != null" >
+        #{zbType,jdbcType=TINYINT},
+      </if>
+      <if test="zbCreateTime != null" >
+        #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateTime != null" >
+        #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.education.pojo.TZbCourseCommentExample" resultType="java.lang.Integer" >
+    select count(*) from t_zb_course_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_zb_course_comment
+    <set >
+      <if test="record.zbId != null" >
+        zb_id = #{record.zbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbUsername != null" >
+        zb_username = #{record.zbUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbToUsername != null" >
+        zb_to_username = #{record.zbToUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbCourseId != null" >
+        zb_course_id = #{record.zbCourseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbSectionId != null" >
+        zb_section_id = #{record.zbSectionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbSectionTitle != null" >
+        zb_section_title = #{record.zbSectionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbContent != null" >
+        zb_content = #{record.zbContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbRefId != null" >
+        zb_ref_id = #{record.zbRefId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbRefContent != null" >
+        zb_ref_content = #{record.zbRefContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbType != null" >
+        zb_type = #{record.zbType,jdbcType=TINYINT},
+      </if>
+      <if test="record.zbCreateTime != null" >
+        zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zbUpdateTime != null" >
+        zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_zb_course_comment
+    set zb_id = #{record.zbId,jdbcType=INTEGER},
+      zb_username = #{record.zbUsername,jdbcType=VARCHAR},
+      zb_to_username = #{record.zbToUsername,jdbcType=VARCHAR},
+      zb_course_id = #{record.zbCourseId,jdbcType=INTEGER},
+      zb_section_id = #{record.zbSectionId,jdbcType=INTEGER},
+      zb_section_title = #{record.zbSectionTitle,jdbcType=VARCHAR},
+      zb_content = #{record.zbContent,jdbcType=VARCHAR},
+      zb_ref_id = #{record.zbRefId,jdbcType=INTEGER},
+      zb_ref_content = #{record.zbRefContent,jdbcType=VARCHAR},
+      zb_type = #{record.zbType,jdbcType=TINYINT},
+      zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.education.pojo.TZbCourseComment" >
+    update t_zb_course_comment
+    <set >
+      <if test="zbUsername != null" >
+        zb_username = #{zbUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="zbToUsername != null" >
+        zb_to_username = #{zbToUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCourseId != null" >
+        zb_course_id = #{zbCourseId,jdbcType=INTEGER},
+      </if>
+      <if test="zbSectionId != null" >
+        zb_section_id = #{zbSectionId,jdbcType=INTEGER},
+      </if>
+      <if test="zbSectionTitle != null" >
+        zb_section_title = #{zbSectionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="zbContent != null" >
+        zb_content = #{zbContent,jdbcType=VARCHAR},
+      </if>
+      <if test="zbRefId != null" >
+        zb_ref_id = #{zbRefId,jdbcType=INTEGER},
+      </if>
+      <if test="zbRefContent != null" >
+        zb_ref_content = #{zbRefContent,jdbcType=VARCHAR},
+      </if>
+      <if test="zbType != null" >
+        zb_type = #{zbType,jdbcType=TINYINT},
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.education.pojo.TZbCourseComment" >
+    update t_zb_course_comment
+    set zb_username = #{zbUsername,jdbcType=VARCHAR},
+      zb_to_username = #{zbToUsername,jdbcType=VARCHAR},
+      zb_course_id = #{zbCourseId,jdbcType=INTEGER},
+      zb_section_id = #{zbSectionId,jdbcType=INTEGER},
+      zb_section_title = #{zbSectionTitle,jdbcType=VARCHAR},
+      zb_content = #{zbContent,jdbcType=VARCHAR},
+      zb_ref_id = #{zbRefId,jdbcType=INTEGER},
+      zb_ref_content = #{zbRefContent,jdbcType=VARCHAR},
+      zb_type = #{zbType,jdbcType=TINYINT},
+      zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP}
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+</mapper>

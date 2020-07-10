@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.education.mapper.TZbCourseSectionMapper" >
+  <resultMap id="BaseResultMap" type="com.education.pojo.TZbCourseSection" >
+    <id column="zb_id" property="zbId" jdbcType="INTEGER" />
+    <result column="zb_course_id" property="zbCourseId" jdbcType="INTEGER" />
+    <result column="zb_parent_id" property="zbParentId" jdbcType="INTEGER" />
+    <result column="zb_name" property="zbName" jdbcType="VARCHAR" />
+    <result column="zb_sort" property="zbSort" jdbcType="INTEGER" />
+    <result column="zb_time" property="zbTime" jdbcType="VARCHAR" />
+    <result column="zb_onsale" property="zbOnsale" jdbcType="BIT" />
+    <result column="zb_video_url" property="zbVideoUrl" jdbcType="VARCHAR" />
+    <result column="zb_create_time" property="zbCreateTime" jdbcType="TIMESTAMP" />
+    <result column="zb_update_time" property="zbUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    zb_id, zb_course_id, zb_parent_id, zb_name, zb_sort, zb_time, zb_onsale, zb_video_url, 
+    zb_create_time, zb_update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.education.pojo.TZbCourseSectionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_zb_course_section
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_zb_course_section
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_zb_course_section
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.education.pojo.TZbCourseSectionExample" >
+    delete from t_zb_course_section
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.education.pojo.TZbCourseSection" >
+    insert into t_zb_course_section (zb_id, zb_course_id, zb_parent_id, 
+      zb_name, zb_sort, zb_time, 
+      zb_onsale, zb_video_url, zb_create_time, 
+      zb_update_time)
+    values (#{zbId,jdbcType=INTEGER}, #{zbCourseId,jdbcType=INTEGER}, #{zbParentId,jdbcType=INTEGER}, 
+      #{zbName,jdbcType=VARCHAR}, #{zbSort,jdbcType=INTEGER}, #{zbTime,jdbcType=VARCHAR}, 
+      #{zbOnsale,jdbcType=BIT}, #{zbVideoUrl,jdbcType=VARCHAR}, #{zbCreateTime,jdbcType=TIMESTAMP}, 
+      #{zbUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.education.pojo.TZbCourseSection" >
+    insert into t_zb_course_section
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        zb_id,
+      </if>
+      <if test="zbCourseId != null" >
+        zb_course_id,
+      </if>
+      <if test="zbParentId != null" >
+        zb_parent_id,
+      </if>
+      <if test="zbName != null" >
+        zb_name,
+      </if>
+      <if test="zbSort != null" >
+        zb_sort,
+      </if>
+      <if test="zbTime != null" >
+        zb_time,
+      </if>
+      <if test="zbOnsale != null" >
+        zb_onsale,
+      </if>
+      <if test="zbVideoUrl != null" >
+        zb_video_url,
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time,
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zbId != null" >
+        #{zbId,jdbcType=INTEGER},
+      </if>
+      <if test="zbCourseId != null" >
+        #{zbCourseId,jdbcType=INTEGER},
+      </if>
+      <if test="zbParentId != null" >
+        #{zbParentId,jdbcType=INTEGER},
+      </if>
+      <if test="zbName != null" >
+        #{zbName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbSort != null" >
+        #{zbSort,jdbcType=INTEGER},
+      </if>
+      <if test="zbTime != null" >
+        #{zbTime,jdbcType=VARCHAR},
+      </if>
+      <if test="zbOnsale != null" >
+        #{zbOnsale,jdbcType=BIT},
+      </if>
+      <if test="zbVideoUrl != null" >
+        #{zbVideoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCreateTime != null" >
+        #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateTime != null" >
+        #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.education.pojo.TZbCourseSectionExample" resultType="java.lang.Integer" >
+    select count(*) from t_zb_course_section
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_zb_course_section
+    <set >
+      <if test="record.zbId != null" >
+        zb_id = #{record.zbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbCourseId != null" >
+        zb_course_id = #{record.zbCourseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbParentId != null" >
+        zb_parent_id = #{record.zbParentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbName != null" >
+        zb_name = #{record.zbName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbSort != null" >
+        zb_sort = #{record.zbSort,jdbcType=INTEGER},
+      </if>
+      <if test="record.zbTime != null" >
+        zb_time = #{record.zbTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbOnsale != null" >
+        zb_onsale = #{record.zbOnsale,jdbcType=BIT},
+      </if>
+      <if test="record.zbVideoUrl != null" >
+        zb_video_url = #{record.zbVideoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbCreateTime != null" >
+        zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zbUpdateTime != null" >
+        zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_zb_course_section
+    set zb_id = #{record.zbId,jdbcType=INTEGER},
+      zb_course_id = #{record.zbCourseId,jdbcType=INTEGER},
+      zb_parent_id = #{record.zbParentId,jdbcType=INTEGER},
+      zb_name = #{record.zbName,jdbcType=VARCHAR},
+      zb_sort = #{record.zbSort,jdbcType=INTEGER},
+      zb_time = #{record.zbTime,jdbcType=VARCHAR},
+      zb_onsale = #{record.zbOnsale,jdbcType=BIT},
+      zb_video_url = #{record.zbVideoUrl,jdbcType=VARCHAR},
+      zb_create_time = #{record.zbCreateTime,jdbcType=TIMESTAMP},
+      zb_update_time = #{record.zbUpdateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.education.pojo.TZbCourseSection" >
+    update t_zb_course_section
+    <set >
+      <if test="zbCourseId != null" >
+        zb_course_id = #{zbCourseId,jdbcType=INTEGER},
+      </if>
+      <if test="zbParentId != null" >
+        zb_parent_id = #{zbParentId,jdbcType=INTEGER},
+      </if>
+      <if test="zbName != null" >
+        zb_name = #{zbName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbSort != null" >
+        zb_sort = #{zbSort,jdbcType=INTEGER},
+      </if>
+      <if test="zbTime != null" >
+        zb_time = #{zbTime,jdbcType=VARCHAR},
+      </if>
+      <if test="zbOnsale != null" >
+        zb_onsale = #{zbOnsale,jdbcType=BIT},
+      </if>
+      <if test="zbVideoUrl != null" >
+        zb_video_url = #{zbVideoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="zbCreateTime != null" >
+        zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zbUpdateTime != null" >
+        zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.education.pojo.TZbCourseSection" >
+    update t_zb_course_section
+    set zb_course_id = #{zbCourseId,jdbcType=INTEGER},
+      zb_parent_id = #{zbParentId,jdbcType=INTEGER},
+      zb_name = #{zbName,jdbcType=VARCHAR},
+      zb_sort = #{zbSort,jdbcType=INTEGER},
+      zb_time = #{zbTime,jdbcType=VARCHAR},
+      zb_onsale = #{zbOnsale,jdbcType=BIT},
+      zb_video_url = #{zbVideoUrl,jdbcType=VARCHAR},
+      zb_create_time = #{zbCreateTime,jdbcType=TIMESTAMP},
+      zb_update_time = #{zbUpdateTime,jdbcType=TIMESTAMP}
+    where zb_id = #{zbId,jdbcType=INTEGER}
+  </update>
+</mapper>
